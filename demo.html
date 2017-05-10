@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>duangJS</title>
+</head>
+<body>
+	<input type="text" name="name" class="-input" id="name_input">
+	<input type="text" name="age" class="-input" id="age_input">
+</body>
+<script type="text/javascript" src="./duang-2.0.js"></script>
+<script type="text/javascript">
+(function() {
+	duang.module("module1")
+	.service("service1", [], function() {
+		return {
+			get: function() {
+				return 1;
+			}
+		}
+	})
+	.controller("controller1", ["service1"], function(service1) {
+		console.log(service1.get().then(function(result) {}));
+	});
+
+	duang.module("module", ["module1"])
+	.controller("controller1", ["service1"], function(service1) {
+		console.log(service1.get());
+	});
+}())
+</script>
+</html>
